@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using todo_api.Application.Commands.DeleteList;
 using todo_api.Application.Commands.DeleteNote;
 using todo_api.Application.Commands.UpdateNote;
-using todo_api.Application.Queries.GetNote;
 using todo_api.Application.Queries.GetNoteList;
 using todo_api.Common;
 using todo_api.Application.Commands;
@@ -40,18 +39,6 @@ namespace todo_api.Controllers
             };
             var JsonResult = await Mediator.Send(query);
             return Ok(JsonResult);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<NoteVM>> Get(Guid id)
-        {
-            var query = new GetNoteQuery
-            {
-                Id = id
-            };
-
-            var vm = await Mediator.Send(query);
-            return Ok(vm);
         }
 
         [HttpPost]
@@ -103,7 +90,6 @@ namespace todo_api.Controllers
             {
                 var command = new CreateNoteCommand
                 {
-                    Id = note.Id,
                     Text = note.Text,
                     Tag = note.Tag,
                     Status = note.Status,

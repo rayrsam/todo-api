@@ -20,7 +20,7 @@ namespace todo_api.Application.Commands.CreateNote
         {
             var note = new Note
             {
-                Id = (request.Id == Guid.Empty) ? Guid.NewGuid() : request.Id,
+                Id = Guid.NewGuid(),
                 Text = request.Text,
                 Tag = request.Tag,
                 Status = request.Status
